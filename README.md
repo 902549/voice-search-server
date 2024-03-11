@@ -2,6 +2,8 @@
 
 This project allows you to set up a voice search server, add items to the database along with their speech descriptions, and query the items using voice queries.
 
+If using a Windows machine, you will need to use a Linux terminal to set up the server. The set up for the Windows Subsystem for Linux (WSL) is at the bottom of the README.
+
 ## Installation
 
 Follow these steps to set up the voice search server:
@@ -19,6 +21,9 @@ Follow these steps to set up the voice search server:
     pip3 install click
     ```
 
+   ```bash
+   conda install -y -c conda-forge librosa
+   ```
 ## Running the Server
 
 Use the following command to start the voice search server:
@@ -52,4 +57,45 @@ python3 classify.py localhost:8080 query.wav
 To retrain the ranker, use the following command:
 ```bash
 python3 train_classifier.py localhost:8080
+```
+
+
+## Windows Linux Subsystem Setup
+The following steps should create a suitable Linux subsystem to follow the installation steps above.
+
+1. Install WSL
+To install WSL, use the following command and then restart your machine:
+```bash
+wsl --install
+```
+
+If wsl is already installed, use the following command to create a Ubuntu terminal:
+```bash
+wsl --install -d Ubuntu
+```
+
+This will open a terminal to set up your Linux username and password. For more information about WSL set up, please see https://learn.microsoft.com/en-us/windows/wsl/setup/environment
+
+2. Install Miniconda
+To install Miniconda within the Ubuntu terminal, run the following command:
+```bash
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm -rf ~/miniconda3/miniconda.sh
+```
+
+The instructions for installing Miniconda on the command line can also be found here https://docs.anaconda.com/free/miniconda/#quick-command-line-install
+
+3. Initialize Miniconda
+To initialize Miniconda within the Ubuntu terminal, run the following command:
+```bash
+~/miniconda3/bin/conda init bash
+~/miniconda3/bin/conda init zsh
+```
+
+4. Install pip
+To install pip within the Ubuntu terminal, run the following command:
+```bash
+sudo apt-get install python3-pip
 ```
